@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>God-Tier AI Agent | Local AI Assistant</title>
+    <meta name="description" content="A fully local, uncensored AI agent that runs on your own machine. Supports vision, PDF generation, code writing, and more.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+                   script-src 'self' https://cdn.jsdelivr.net;
+                   style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+                   font-src https://fonts.gstatic.com;
+                   img-src 'self' data: blob:;
+                   connect-src http://127.0.0.1:8000;">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Marked.js – Markdown Renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+
+        <!-- ── Sidebar ─────────────────────────────────────── -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <div class="brand-icon">⚡</div>
+                    <span class="brand-name">God-Tier AI</span>
+                </div>
+                <button id="new-chat-btn" class="new-chat-btn" title="New Chat">+</button>
+            </div>
+
+            <!-- Model Status Badge -->
+            <div id="status-badge" class="status-badge status-checking">
+                <span class="status-dot"></span>
+                <span id="status-text">Checking model…</span>
+            </div>
+
+            <div class="sidebar-section-label">Sessions</div>
+            <div class="chat-history">
+                <ul id="history-list">
+                    <!-- JS renders session items here -->
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="model-tag" id="model-tag">Model: loading…</div>
+                <button id="clear-btn" class="clear-btn" title="Clear current chat">🗑 Clear Chat</button>
+            </div>
+        </aside>
+
+        <!-- ── Mobile sidebar toggle ───────────────────────── -->
+        <button id="sidebar-toggle" class="sidebar-toggle" title="Toggle Sidebar">☰</button>
+
+        <!-- ── Main Chat Pane ──────────────────────────────── -->
+        <main class="main-chat">
+            <header class="top-bar">
+                <h1 id="chat-title">God-Tier Assistant</h1>
+                <div class="top-bar-sub">LLaVA Vision · PDF Generation · Code · Image Analysis</div>
+            </header>
+
+            <div id="chat-window" class="chat-window">
+                <!-- Initial welcome message (rendered by JS on load) -->
+            </div>
+
+            <!-- ── Input Area ──────────────────────────────── -->
+            <div class="input-area">
+                <div class="input-wrapper" id="input-wrapper">
+
+                    <!-- Image preview strip -->
+                    <div id="image-preview" class="image-preview hidden">
+                        <img id="preview-img" src="" alt="Attached image">
+                        <button id="remove-img-btn" class="remove-img-btn" title="Remove image" aria-label="Remove attached image">✕</button>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="image-upload" class="attach-btn" title="Attach Image or Document (PNG/JPG, Excel, Word, Text)" aria-label="Attach file">
+                            📎
+                        </label>
+                        <input type="file" id="image-upload" accept="image/png,image/jpeg,image/webp,.xlsx,.csv,.docx,.txt" class="hidden-file" aria-label="Upload file">
+
+                        <textarea
+                            id="chat-input"
+                            placeholder="Ask anything… 'create a PDF', 'explain this image', 'write Python code for…'"
+                            rows="1"
+                            aria-label="Chat message input"
+                            maxlength="5000"
+                        ></textarea>
+
+                        <button id="send-btn" title="Send message (Enter)" aria-label="Send message">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="19" x2="12" y2="5"></line>
+                                <polyline points="5 12 12 5 19 12"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <p class="footer-note">
+                    Runs 100% locally on your machine · No data leaves your PC ·
+                    <span id="char-count">0</span>/5000
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Hidden meta – token read by JS, never printed in visible DOM -->
+    <meta name="api-token" content="__M1_TOKEN_PLACEHOLDER__">
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
